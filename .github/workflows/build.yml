@@ -21,7 +21,7 @@ jobs:
       - name: Зависимости
         run: |
           dnf install -y \
-            gcc-c++ cmake ninja-build git-core \
+            gcc-c++ libstdc++-static cmake ninja-build git-core \
             qt6-qtbase-devel qt6-qtdeclarative-devel \
             rpm-build \
             dejavu-sans-fonts mesa-libGL mesa-libEGL
