@@ -1,0 +1,15 @@
+[Desktop Entry]
+Type=Application
+Version=1.0
+Name=RPM Builder
+Name[ru]=RPM Builder — сборщик RPM-пакетов
+GenericName=RPM Package Builder
+Comment=Create and build RPM packages visually
+Comment[ru]=Визуальная сборка RPM-пакетов без ручного редактирования spec-файлов
+Exec=rpm-builder
+Icon=rpm-builder
+Terminal=false
+Categories=Development;Building;Utility;
+Keywords=rpm;package;build;packaging;spec;пакет;сборка;
+StartupWMClass=RpmBuilder
+X-KDE-StartupNotify=true

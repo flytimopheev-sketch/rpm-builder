@@ -1,0 +1,38 @@
+{
+    "magic": "rpm-builder-project",
+    "formatVersion": 1,
+    "application": "RPM Builder",
+    "appVersion": "1.2.0",
+    "savedAt": "2026-09-01T12:00:00",
+    "project": {
+        "arch": "noarch",
+        "buildRequires": [
+        ],
+        "description": "Пример: программа-скрипт hello.sh, упакованная в RPM при помощи RPM Builder.\nПосле установки команда доступна всем пользователям как hello.sh (файл в /usr/bin).\nПроверка установки:  rpm -qi hello\nУдаление:            sudo dnf remove hello",
+        "files": [
+            {
+                "dst": "%{_bindir}",
+                "src": "~/hello.sh"
+            }
+        ],
+        "license": "MIT",
+        "name": "hello",
+        "packager": "",
+        "provides": [
+        ],
+        "release": "1%{?dist}",
+        "requires": [
+            "bash"
+        ],
+        "scripts": {
+            "post": "echo \"Готово! Проверьте: выполните в терминале команду hello.sh\"\n",
+            "postun": "",
+            "pre": "",
+            "preun": ""
+        },
+        "summary": "Моя первая программа — пример упаковки в RPM",
+        "url": "",
+        "vendor": "",
+        "version": "1.0"
+    }
+}

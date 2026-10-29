@@ -1,0 +1,43 @@
+{
+    "magic": "rpm-builder-project",
+    "formatVersion": 1,
+    "application": "RPM Builder",
+    "appVersion": "1.3.0",
+    "savedAt": "2026-10-05T12:00:00",
+    "project": {
+        "arch": "x86_64",
+        "buildRequires": [
+            "gcc",
+            "make"
+        ],
+        "description": "Пример: программа на C компилируется gcc прямо во время сборки RPM (секция %build).\nИсходник main.c кладётся в ~/hello-c/main.c, шаблон подхватывает его автоматически.\nПосле установки команда доступна как hello-c (файл в /usr/bin).\nПроверка:  hello-c\nУдаление:  sudo dnf remove hello-c",
+        "files": [
+            {
+                "dst": "",
+                "src": "~/hello-c/main.c"
+            }
+        ],
+        "license": "MIT",
+        "name": "hello-c",
+        "packager": "",
+        "provides": [
+        ],
+        "release": "1%{?dist}",
+        "requires": [
+            "glibc"
+        ],
+        "scripts": {
+            "build": "# Исходники лежат в %{_sourcedir}, рабочий каталог пуст.\ncd %{_sourcedir}\ngcc -O2 %{_sourcedir}/main.c -o hello-c\n",
+            "files": "%{_bindir}/hello-c\n",
+            "install": "install -Dm755 %{_sourcedir}/hello-c %{buildroot}%{_bindir}/hello-c\n",
+            "post": "echo \"Готово! Проверьте: выполните в терминале команду hello-c\"\n",
+            "postun": "",
+            "pre": "",
+            "preun": ""
+        },
+        "summary": "Пример: компиляция C-кода при сборке RPM",
+        "url": "",
+        "vendor": "",
+        "version": "1.0"
+    }
+}

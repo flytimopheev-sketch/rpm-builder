@@ -1,0 +1,52 @@
+name: build
+
+on:
+  push:
+    branches: [main]
+    tags: ['v*']
+  pull_request:
+    branches: [main]
+  workflow_dispatch:
+
+jobs:
+  fedora:
+    name: Сборка и самопроверка (Fedora)
+    runs-on: ubuntu-latest
+    container: fedora:latest
+    timeout-minutes: 30
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Зависимости
+        run: |
+          dnf install -y \
+            gcc-c++ cmake ninja-build git-core \
+            qt6-qtbase-devel qt6-qtdeclarative-devel \
+            rpm-build \
+            dejavu-sans-fonts mesa-libGL mesa-libEGL
+
+      - name: Конфигурация
+        run: cmake -B build -G Ninja -DCMAKE_BUILD_TYPE=Release
+
+      - name: Сборка
+        run: cmake --build build
+
+      - name: Самопроверка (демо-проект + JSON + конвейер сборки)
+        env:
+          QT_QPA_PLATFORM: offscreen
+        run: ./build/rpm-builder --selftest
+
+      - name: Скриншоты страниц (offscreen)
+        env:
+          QT_QPA_PLATFORM: offscreen
+        run: ./build/rpm-builder --shots shots-ci
+
+      - name: Загрузка артефактов
+        uses: actions/upload-artifact@v4
+        with:
+          name: rpm-builder-linux-x86_64
+          path: |
+            build/rpm-builder
+            shots-ci/
+          if-no-files-found: error

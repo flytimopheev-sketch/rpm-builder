@@ -1,0 +1,24 @@
+# Каталоги сборки
+build/
+build-*/
+*/build/
+
+# Артефакты
+*.rpm
+*.tar.gz
+*.tar.xz
+!docs/**/*.png
+
+# Скриншоты --shots
+shots/
+shots-*/
+page-*.png
+about.png
+picker.png
+
+# IDE / служебное
+CMakeLists.txt.user
+*.autosave
+.DS_Store
+.vscode/
+.idea/
